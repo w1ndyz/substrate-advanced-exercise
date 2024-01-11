@@ -1,5 +1,5 @@
 use crate as pallet_kitties;
-use frame_support::traits::{ConstU16, ConstU64};
+use frame_support::{traits::{ConstU16, ConstU32, ConstU64}, PalletId, parameter_types};
 use sp_core::H256;
 use sp_runtime::{
 	testing::Header,
@@ -22,6 +22,10 @@ frame_support::construct_runtime!(
 		Randomness: pallet_insecure_randomness_collective_flip,
 	}
 );
+
+parameter_types! {
+	pub const KittyPalletId: PalletId = PalletId(*b"py/kitty");
+}
 
 impl frame_system::Config for Test {
 	type BaseCallFilter = frame_support::traits::Everything;
@@ -53,6 +57,9 @@ impl frame_system::Config for Test {
 impl pallet_kitties::Config for Test {
 	type RuntimeEvent = RuntimeEvent;
 	type Randomness = Randomness;
+	type KittyPrice = ConstU32<1>;
+	type Currency = ();
+	type PalletId = KittyPalletId;
 }
 
 impl pallet_insecure_randomness_collective_flip::Config for Test {}

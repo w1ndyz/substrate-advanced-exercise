@@ -109,3 +109,50 @@ fn it_works_for_transfer() {
     }));
   });
 }
+
+#[test]
+fn it_works_on_sale() {
+    new_test_ext().execute_with(|| {
+      let kitty_id = 0;
+      let account_id = 1;
+
+      assert_ok!(KittiesModule::create(RuntimeOrigin::signed(account_id)));
+      assert_eq!(KittiesModule::kitty_owner(kitty_id), Some(account_id));
+      assert_noop!(
+        KittiesModule::sale(RuntimeOrigin::signed(account_id + 1), kitty_id),
+        Error::<Test>::NotOwner
+      );
+      assert_ok!(KittiesModule::sale(RuntimeOrigin::signed(account_id), kitty_id));
+
+      System::assert_has_event(RuntimeEvent::KittiesModule(crate::Event::KittyOnSale {
+        who: account_id,
+        kitty_id: kitty_id,
+      }));
+    });
+}
+
+#[test]
+fn it_works_on_bought() {
+  new_test_ext().execute_with(|| {
+    let kitty_id = 0;
+    let account_id = 1;
+    let buyer = 2;
+
+    assert_ok!(KittiesModule::create(RuntimeOrigin::signed(account_id)));
+    assert_ok!(KittiesModule::create(RuntimeOrigin::signed(buyer)));
+    assert_eq!(KittiesModule::kitty_owner(kitty_id), Some(account_id));
+    assert_ok!(KittiesModule::sale(RuntimeOrigin::signed(account_id), kitty_id));
+    assert_noop!(
+      KittiesModule::buy(RuntimeOrigin::signed(account_id), kitty_id),
+      Error::<Test>::AlreadyOwned
+    );
+    assert_ok!(KittiesModule::buy(RuntimeOrigin::signed(buyer), kitty_id));
+
+    assert_eq!(KittiesModule::kitty_owner(kitty_id), Some(buyer));
+
+    System::assert_has_event(RuntimeEvent::KittiesModule(crate::Event::KittyBought {
+      who: buyer,
+      kitty_id: kitty_id,
+    }));
+  });
+}

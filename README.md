@@ -19,3 +19,19 @@ Q2:
 · 单元测试通过
   ![week2_1_2](./img/week2_q1_2.png)
 
+### week3
+
+Q1:
+· 单元测试通过
+  ![week3_1_1](./img/week3_test.png)
+· 编译通过
+  ![week3_1_2](./img/week3_build.png)
+· 节点启动
+  ![week3_1_3](./img/week3_run.png)
+
+Q2:
+· 升级
+  ![week3_2_1](./img/week3_upgrade.png)
+· 验证
+  ![week3_2_2](./img/week3_kitty.png)
+
