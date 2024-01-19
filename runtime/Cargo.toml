@@ -77,7 +77,6 @@ std = [
 	"pallet-template/std",
 	"pallet-poe/std",
 	"pallet-kitties/std",
-	"pallet-insecure-randomness-collective-flip/std",
 	"pallet-timestamp/std",
 	"pallet-transaction-payment-rpc-runtime-api/std",
 	"pallet-transaction-payment/std",
