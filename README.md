@@ -48,3 +48,8 @@ Q2:
 Q4: 
 · 运行结果
   ![week4_4](./img/week4_4.png)
+
+### week6
+Q1:
+· 运行结果
+  ![week6_1](./img/week6_1.png)

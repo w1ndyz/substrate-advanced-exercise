@@ -4797,6 +4797,7 @@ dependencies = [
  "sp-core 7.0.0 (git+https://github.com/paritytech/substrate.git?branch=polkadot-v0.9.42)",
  "sp-io",
  "sp-runtime",
+ "sp-std 4.0.0",
 ]
 
 [[package]]
@@ -8135,6 +8136,11 @@ dependencies = [
  "thiserror",
  "tracing",
 ]
+
+[[package]]
+name = "sp-std"
+version = "4.0.0"
+source = "git+https://github.com/paritytech/substrate.git?branch=polkadot-v0.9.25#3348e144f0a2b39ce08bd8e3b976c42fe0c990b9"
 
 [[package]]
 name = "sp-std"
